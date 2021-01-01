@@ -195,7 +195,7 @@ development teams fill out a spreadsheet with the relevant data. After
 collecting all data in a single spreadsheet, it is exported to a CSV file. An
 example of the spreadsheet is shown below:
 
-![requests spreadsheet](images/requests.png)
+![requests spreadsheet](https://github.com/conrad-mukai/spotilyzer/raw/master/images/requests.png)
 
 The headers are used to set keys in a JSON document, so they must be present in
 the CSV file.
