@@ -248,16 +248,23 @@ cost. The results of this analysis is presented on the console like so:
     |         | 24xlarge |                8 |       15.675 |
     +---------+----------+------------------+--------------+
 
-The results show an estimate of the number of instances and total hourly cost
-for each spot fleet candidate. The results are ordered by cost.
+The output shows an estimate of the number of instances and total hourly cost
+for each spot fleet candidate. The fleets are ordered by cost.
 
 In order to account for overhead and wasted resources due to random packing of
 pods a buffer is applied to the requests. The default buffer is 20%, but this
 can be adjusted using the `-b` option.
 
-A selection of results are presented so specific requirements can be applied.
+A selection of fleets are presented so specific requirements can be applied.
 For example, too few nodes can result in an adverse *blast radius* effect where
 the loss of a single node is overly disruptive. On the other hand if there is a
 limit on the number of instances available, then too many nodes is undesirable.
 Given all the choices, the tool provides a data driven rationale for selecting
 spot fleet pools.
+
+## Testing
+
+To run the unit tests download the code and enter the following command in the
+root directory of the repository:
+
+    python -m unittest

@@ -1,0 +1,8 @@
+pod-name,replicas,core-limit,mem-limit
+web-app-a,100,2,4
+spark-executor-a,50,4,24
+spark-executor-b,100,3,9
+web-app-b,50,2,5
+spark-executor-c,50,4,28
+web-app-c,200,2,8
+spark-executor-d,100,2,16

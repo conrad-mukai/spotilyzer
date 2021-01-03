@@ -1,0 +1,1527 @@
+{
+  "region": "us-west-2",
+  "metadata": {
+    "timestamp": "2021-01-01T22:14:13.120426",
+    "duration": 30,
+    "minpool": 20
+  },
+  "groups": [
+    {
+      "group-name": "compute",
+      "mem-core-ratio": 2.0588235294117645,
+      "candidates": [
+        {
+          "candidate-name": "large",
+          "price": 0.03889074115206092,
+          "resources": {
+            "avg-cores": 2.0,
+            "avg-memory": 4.142857142857143,
+            "min-cores": 2,
+            "min-memory": 3.75
+          },
+          "pools": [
+            {
+              "instance-type": "c5d.large",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "c4.large",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "c5n.large",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "c5.large",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "c5a.large",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2d",
+                "us-west-2b",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "c5ad.large",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2b",
+                "us-west-2a"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "xlarge",
+          "price": 0.06997436636471373,
+          "resources": {
+            "avg-cores": 4.0,
+            "avg-memory": 8.285714285714286,
+            "min-cores": 4,
+            "min-memory": 7.5
+          },
+          "pools": [
+            {
+              "instance-type": "c5ad.xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "c4.xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "c5.xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2d",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "c5n.xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "c5d.xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2d",
+                "us-west-2a",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "c5a.xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "2xlarge",
+          "price": 0.1502336598453462,
+          "resources": {
+            "avg-cores": 8.0,
+            "avg-memory": 16.571428571428573,
+            "min-cores": 8,
+            "min-memory": 15.0
+          },
+          "pools": [
+            {
+              "instance-type": "c5ad.2xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2d",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "c5d.2xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2d",
+                "us-west-2a",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "c5.2xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "c5n.2xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "c5a.2xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "c4.2xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2a"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "4xlarge",
+          "price": 0.3312519732768322,
+          "resources": {
+            "avg-cores": 16.0,
+            "avg-memory": 33.142857142857146,
+            "min-cores": 16,
+            "min-memory": 30.0
+          },
+          "pools": [
+            {
+              "instance-type": "c5.4xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2d",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "c4.4xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "c5ad.4xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2a",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "c5a.4xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "c5d.4xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "c5n.4xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2a"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "8xlarge",
+          "price": 0.6175962092849199,
+          "resources": {
+            "avg-cores": 34.666666666666664,
+            "avg-memory": 71.04761904761905,
+            "min-cores": 32,
+            "min-memory": 60.0
+          },
+          "pools": [
+            {
+              "instance-type": "c4.8xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "c5a.8xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "c5.9xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2d",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "c5d.9xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "c5n.9xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "c5ad.8xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2b",
+                "us-west-2a"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "12xlarge",
+          "price": 0.9607231186440679,
+          "resources": {
+            "avg-cores": 48.0,
+            "avg-memory": 96.0,
+            "min-cores": 48,
+            "min-memory": 96.0
+          },
+          "pools": [
+            {
+              "instance-type": "c5.12xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2d",
+                "us-west-2a",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "c5d.12xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2d",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "c5a.12xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "c5ad.12xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2a",
+                "us-west-2b"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "16xlarge",
+          "price": 1.2916133112522832,
+          "resources": {
+            "avg-cores": 68.88888888888889,
+            "avg-memory": 145.77777777777777,
+            "min-cores": 64,
+            "min-memory": 128.0
+          },
+          "pools": [
+            {
+              "instance-type": "c5.18xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "c5d.18xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2d",
+                "us-west-2b",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "c5a.16xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2d",
+                "us-west-2a",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "c5ad.16xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2b",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "c5n.18xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2a"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "24xlarge",
+          "price": 1.630422108329305,
+          "resources": {
+            "avg-cores": 96.0,
+            "avg-memory": 192.0,
+            "min-cores": 96,
+            "min-memory": 192.0
+          },
+          "pools": [
+            {
+              "instance-type": "c5.24xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "c5d.24xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "c5a.24xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2d",
+                "us-west-2b",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "c5ad.24xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2d"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "group-name": "general",
+      "mem-core-ratio": 4.0,
+      "candidates": [
+        {
+          "candidate-name": "large",
+          "price": 0.03677436766923659,
+          "resources": {
+            "avg-cores": 2.0,
+            "avg-memory": 8.0,
+            "min-cores": 2,
+            "min-memory": 8.0
+          },
+          "pools": [
+            {
+              "instance-type": "m5d.large",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "m5dn.large",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "m5.large",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2d",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "m5a.large",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2d",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "m5n.large",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "m5ad.large",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2d"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "xlarge",
+          "price": 0.07803925802273413,
+          "resources": {
+            "avg-cores": 4.0,
+            "avg-memory": 16.0,
+            "min-cores": 4,
+            "min-memory": 16.0
+          },
+          "pools": [
+            {
+              "instance-type": "m4.xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "m5d.xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "m5.xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "m5n.xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "m5ad.xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "m5a.xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2a"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "2xlarge",
+          "price": 0.1975415947220826,
+          "resources": {
+            "avg-cores": 8.0,
+            "avg-memory": 32.0,
+            "min-cores": 8,
+            "min-memory": 32.0
+          },
+          "pools": [
+            {
+              "instance-type": "m4.2xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "m5.2xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "m5a.2xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "m5d.2xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "m5ad.2xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "m5n.2xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2b"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "4xlarge",
+          "price": 0.34803956724307383,
+          "resources": {
+            "avg-cores": 16.0,
+            "avg-memory": 64.0,
+            "min-cores": 16,
+            "min-memory": 64.0
+          },
+          "pools": [
+            {
+              "instance-type": "m5.4xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "m4.4xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "m5ad.4xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2d",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "m5d.4xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2d",
+                "us-west-2a",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "m5a.4xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "m5n.4xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2b"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "8xlarge",
+          "price": 0.8025482339228923,
+          "resources": {
+            "avg-cores": 32.0,
+            "avg-memory": 128.0,
+            "min-cores": 32,
+            "min-memory": 128.0
+          },
+          "pools": [
+            {
+              "instance-type": "m5.8xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "m5d.8xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "m5a.8xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "m5ad.8xlarge",
+              "availability-zones": [
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "m5n.8xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "m5dn.8xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2a"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "12xlarge",
+          "price": 1.0872618052658203,
+          "resources": {
+            "avg-cores": 46.90909090909091,
+            "avg-memory": 187.63636363636363,
+            "min-cores": 40,
+            "min-memory": 160.0
+          },
+          "pools": [
+            {
+              "instance-type": "m5.12xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2d",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "m4.10xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "m5a.12xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2d",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "m5ad.12xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2d",
+                "us-west-2c",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "m5d.12xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2d",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "m5n.12xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "16xlarge",
+          "price": 1.5381297029155265,
+          "resources": {
+            "avg-cores": 64.0,
+            "avg-memory": 256.0,
+            "min-cores": 64,
+            "min-memory": 256.0
+          },
+          "pools": [
+            {
+              "instance-type": "m5ad.16xlarge",
+              "availability-zones": [
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "m5.16xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "m5a.16xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "m5d.16xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2d",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "m4.16xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "m5n.16xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "m5dn.16xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "24xlarge",
+          "price": 2.1071895997915546,
+          "resources": {
+            "avg-cores": 96.0,
+            "avg-memory": 384.0,
+            "min-cores": 96,
+            "min-memory": 384.0
+          },
+          "pools": [
+            {
+              "instance-type": "m5.24xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2d",
+                "us-west-2a",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "m5a.24xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2d",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "m5d.24xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2d",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "m5ad.24xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "m5n.24xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "m5dn.24xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "group-name": "memory",
+      "mem-core-ratio": 7.961428571428572,
+      "candidates": [
+        {
+          "candidate-name": "large",
+          "price": 0.03616503508181807,
+          "resources": {
+            "avg-cores": 2.0,
+            "avg-memory": 15.892857142857142,
+            "min-cores": 2,
+            "min-memory": 15.25
+          },
+          "pools": [
+            {
+              "instance-type": "r5.large",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2d",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "r5d.large",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "r5n.large",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "r5dn.large",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "r4.large",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "r5a.large",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2d"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "xlarge",
+          "price": 0.08219709848933404,
+          "resources": {
+            "avg-cores": 4.0,
+            "avg-memory": 31.795454545454547,
+            "min-cores": 4,
+            "min-memory": 30.5
+          },
+          "pools": [
+            {
+              "instance-type": "r5d.xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "r5a.xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "r5ad.xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "r5n.xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "r5.xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2d",
+                "us-west-2a",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "r4.xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2c"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "2xlarge",
+          "price": 0.18488058979739888,
+          "resources": {
+            "avg-cores": 8.0,
+            "avg-memory": 63.59090909090909,
+            "min-cores": 8,
+            "min-memory": 61.0
+          },
+          "pools": [
+            {
+              "instance-type": "r5d.2xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2d",
+                "us-west-2c",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "r5a.2xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2d",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "r4.2xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "r5.2xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2d",
+                "us-west-2a",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "r5n.2xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "r5ad.2xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2d",
+                "us-west-2c"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "4xlarge",
+          "price": 0.3674364905968925,
+          "resources": {
+            "avg-cores": 16.0,
+            "avg-memory": 127.18181818181819,
+            "min-cores": 16,
+            "min-memory": 122.0
+          },
+          "pools": [
+            {
+              "instance-type": "r5ad.4xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2d",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "r5a.4xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "r5.4xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "r4.4xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "r5d.4xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "r5dn.4xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "8xlarge",
+          "price": 0.8438899524686237,
+          "resources": {
+            "avg-cores": 32.0,
+            "avg-memory": 254.36363636363637,
+            "min-cores": 32,
+            "min-memory": 244.0
+          },
+          "pools": [
+            {
+              "instance-type": "r5ad.8xlarge",
+              "availability-zones": [
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "r5a.8xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2d",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "r5d.8xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "r4.8xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "r5dn.8xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "r5.8xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2d",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "r5n.8xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "12xlarge",
+          "price": 1.198516764198778,
+          "resources": {
+            "avg-cores": 48.0,
+            "avg-memory": 384.0,
+            "min-cores": 48,
+            "min-memory": 384.0
+          },
+          "pools": [
+            {
+              "instance-type": "r5a.12xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "r5.12xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2d",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "r5n.12xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "r5d.12xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2d",
+                "us-west-2b",
+                "us-west-2c"
+              ]
+            },
+            {
+              "instance-type": "r5dn.12xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "r5ad.12xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2d"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "16xlarge",
+          "price": 1.3820829029363932,
+          "resources": {
+            "avg-cores": 64.0,
+            "avg-memory": 508.72727272727275,
+            "min-cores": 64,
+            "min-memory": 488.0
+          },
+          "pools": [
+            {
+              "instance-type": "r5ad.16xlarge",
+              "availability-zones": [
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "r5a.16xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "r5n.16xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "r5.16xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "r5d.16xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2d",
+                "us-west-2c",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "r4.16xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "r5dn.16xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2b"
+              ]
+            }
+          ]
+        },
+        {
+          "candidate-name": "24xlarge",
+          "price": 2.421028035877313,
+          "resources": {
+            "avg-cores": 96.0,
+            "avg-memory": 768.0,
+            "min-cores": 96,
+            "min-memory": 768.0
+          },
+          "pools": [
+            {
+              "instance-type": "r5.24xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "r5a.24xlarge",
+              "availability-zones": [
+                "us-west-2c",
+                "us-west-2b",
+                "us-west-2a",
+                "us-west-2d"
+              ]
+            },
+            {
+              "instance-type": "r5d.24xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2c",
+                "us-west-2a",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "r5n.24xlarge",
+              "availability-zones": [
+                "us-west-2a",
+                "us-west-2c",
+                "us-west-2b"
+              ]
+            },
+            {
+              "instance-type": "r5dn.24xlarge",
+              "availability-zones": [
+                "us-west-2b",
+                "us-west-2c",
+                "us-west-2a"
+              ]
+            },
+            {
+              "instance-type": "r5ad.24xlarge",
+              "availability-zones": [
+                "us-west-2d",
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "requests": [
+    {
+      "pod-name": "web-app-a",
+      "replicas": 100,
+      "core-limit": 2.0,
+      "mem-limit": 4.0,
+      "group-name": "compute"
+    },
+    {
+      "pod-name": "spark-executor-a",
+      "replicas": 50,
+      "core-limit": 4.0,
+      "mem-limit": 24.0,
+      "group-name": "memory"
+    },
+    {
+      "pod-name": "spark-executor-b",
+      "replicas": 100,
+      "core-limit": 3.0,
+      "mem-limit": 9.0,
+      "group-name": "general"
+    },
+    {
+      "pod-name": "web-app-b",
+      "replicas": 50,
+      "core-limit": 2.0,
+      "mem-limit": 5.0,
+      "group-name": "compute"
+    },
+    {
+      "pod-name": "spark-executor-c",
+      "replicas": 50,
+      "core-limit": 4.0,
+      "mem-limit": 28.0,
+      "group-name": "memory"
+    },
+    {
+      "pod-name": "web-app-c",
+      "replicas": 200,
+      "core-limit": 2.0,
+      "mem-limit": 8.0,
+      "group-name": "general"
+    },
+    {
+      "pod-name": "spark-executor-d",
+      "replicas": 100,
+      "core-limit": 2.0,
+      "mem-limit": 16.0,
+      "group-name": "memory"
+    }
+  ]
+}

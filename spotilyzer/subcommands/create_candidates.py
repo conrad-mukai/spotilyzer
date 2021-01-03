@@ -126,10 +126,11 @@ class CreateCandidates(SubCommand):
 
     def _validate_azs(self, availability_zones):
         valid_azs = set(self._get_azs())
-        if len(set(availability_zones) - valid_azs) > 0:
-            az_iter = (a for a in availability_zones if a not in valid_azs)
-            raise ValueError("invalid availability zone(s): "
-                             f"{','.join(az_iter)}")
+        invalid_azs = set(availability_zones) - valid_azs
+        if len(invalid_azs) > 0:
+            raise ValueError("invalid availability zone(s) for region "
+                             f"{self.client.meta.region_name}: "
+                             f"{','.join(invalid_azs)}")
 
     def _get_instance_type_offerings(self, seeds, availability_zones):
         data = {}
@@ -219,8 +220,7 @@ class CreateCandidates(SubCommand):
             print(f"  {az}: {record_count} records")
         return end
 
-    @staticmethod
-    def _compute_stats(data):
+    def _compute_stats(self, data):
         stats = {}
         del_list = []
         for group, group_data in data.items():
@@ -250,6 +250,11 @@ class CreateCandidates(SubCommand):
                 for instance_type in del_set:
                     del instance_type_stats[instance_type]
                 del_list.extend(del_set)
+            self._cleanup_dict(group_stats)
+        self._cleanup_dict(stats)
+        if len(stats) == 0:
+            raise RuntimeError("duration too short to collect any "
+                               "statistically significant samples")
         if len(del_list) > 0:
             print()
             print(
@@ -260,6 +265,15 @@ class CreateCandidates(SubCommand):
                 ), '\n'
             )
         return stats
+
+    @staticmethod
+    def _cleanup_dict(stats_dict):
+        del_set = set()
+        for key, value_dict in stats_dict.items():
+            if len(value_dict) == 0:
+                del_set.add(key)
+        for key in del_set:
+            del stats_dict[key]
 
     def _select_candidates(self, stats):
         print("selecting candidates...")
