@@ -10,7 +10,7 @@ that gap by making the selection process a data-driven one.
 ## Requirements
 
 To run spotilyzer you need the following:
-* Python 3.6 or later; and
+* Python 3.5 or later; and
 * an AWS account with ec2:Describe* privileges.
 
 ## Installation
