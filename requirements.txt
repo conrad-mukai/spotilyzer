@@ -1,7 +1,7 @@
 jsonschema==3.2.0
 attrs==20.3.0
 pyrsistent==0.17.3
-setuptools==47.1.0
+setuptools==49.2.1
 six==1.15.0
 boto3==1.16.35
 botocore==1.19.35
