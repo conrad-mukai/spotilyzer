@@ -6,7 +6,7 @@ spotilyzer test mocks paginators base class
 import os
 
 
-class MockPaginatorsBase(object):
+class MockPaginatorsBase:
 
     def __init__(self):
         self.data_dir = os.path.join(os.path.dirname(__file__), 'data')

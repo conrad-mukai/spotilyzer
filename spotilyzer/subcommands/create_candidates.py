@@ -268,11 +268,8 @@ class CreateCandidates(SubCommand):
 
     @staticmethod
     def _cleanup_dict(stats_dict):
-        del_set = set()
-        for key, value_dict in stats_dict.items():
-            if len(value_dict) == 0:
-                del_set.add(key)
-        for key in del_set:
+        del_list = [k for k,v in stats_dict.items() if len(v) == 0]
+        for key in del_list:
             del stats_dict[key]
 
     def _select_candidates(self, stats):

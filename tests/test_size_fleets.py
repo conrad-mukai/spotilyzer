@@ -4,7 +4,6 @@ spotilyzer size-fleets unit tests
 
 # system imports
 import os
-import json
 
 # project imports
 from spotilyzer import main

@@ -6,16 +6,14 @@ spotilyzer tests mock tabulate function
 import os
 
 # 3rd party imports
-import tabulate
 from tabulate import tabulate as _tabulate
 
-# constants
-_RESULTS_DIR = os.path.join(os.path.dirname(__file__), os.path.pardir,
-                            'results')
+# test imports
+from ..paths import RESULTS_DIR
 
 
 def mock_tabulate(*args, **kwargs):
     display = _tabulate(*args, **kwargs)
-    with open(os.path.join(_RESULTS_DIR, 'tabulate.txt'), 'w') as f:
+    with open(os.path.join(RESULTS_DIR, 'tabulate.txt'), 'w') as f:
         f.write(display)
     return display

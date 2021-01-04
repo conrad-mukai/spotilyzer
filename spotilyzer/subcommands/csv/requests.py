@@ -45,7 +45,7 @@ def _get_request(n, header, row, frequests, line):
     try:
         return {header[i]: _types[i](row[i]) for i in range(n)}
     except ValueError as e:
-        raise SyntaxError(f"invalid type in {frequests}, line {line}: {e}")
+        raise SyntaxError(f"invalid type in {frequests}, line {line}") from e
 
 
 def _validate_pod_names(request_list, frequests):

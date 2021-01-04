@@ -6,7 +6,7 @@ spotilyzer subcommand base class
 import boto3
 
 
-class SubCommand(object):
+class SubCommand:
 
     def __init__(self, args):
         self.client = boto3.client('ec2')

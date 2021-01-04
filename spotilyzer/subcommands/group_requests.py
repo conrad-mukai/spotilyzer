@@ -58,7 +58,7 @@ class GroupRequests(SubCommand):
         request_format = self.getarg(_FORMAT_OPT)
         if request_format == _JSON_FMT:
             return json_requests(self.getarg(_REQUESTS_ARG))
-        elif request_format == _CSV_FMT:
+        if request_format == _CSV_FMT:
             return csv_requests(self.getarg(_REQUESTS_ARG))
         else:
             raise NotImplementedError(f"format {request_format} not "

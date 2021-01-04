@@ -24,7 +24,8 @@ class Init(SubCommand):
         subparsers.add_parser(cls.name, description=_DESCRIPTION,
                               help=_DESCRIPTION)
 
-    def run(self):
+    @staticmethod
+    def run():
         spotilyzer_dir = get_user_datadir()
         os.makedirs(spotilyzer_dir, exist_ok=True)
         if not os.path.exists(os.path.join(spotilyzer_dir, SEEDS_FILE)):
