@@ -140,6 +140,7 @@ class CreateCandidates(SubCommand):
 
     def _get_instance_type_offerings(self, seeds, availability_zones):
         data = {}
+        del_list = []
         for seed in seeds[SEEDS_KEY]:
             group_data = data[seed[GROUP_KEY]] = {}
             instance_type_map = {}
@@ -170,23 +171,24 @@ class CreateCandidates(SubCommand):
                     ][
                         offering['Location']
                     ] = StatCollector()
-            del_list = [
+            group_del_list = [
                 (c, i)
                 for c, g in group_data.items()
                 for i, a in g.items()
                 if len(a) == 0
             ]
-            if len(del_list) > 0:
-                print()
-                print(
-                    textwrap.fill(
-                        "[warning]: the following instance types are not "
-                        "available in this region: "
-                        f"{', '.join(d[1] for d in del_list)}"
-                    ), '\n'
-                )
-                for del_item in del_list:
-                    del group_data[del_item[0]][del_item[1]]
+            for del_item in group_del_list:
+                del group_data[del_item[0]][del_item[1]]
+            del_list.extend(group_del_list)
+        if len(del_list) > 0:
+            print()
+            print(
+                textwrap.fill(
+                    "[warning]: the following instance types are not "
+                    "available in this region: "
+                    f"{', '.join(d[1] for d in del_list)}"
+                ), '\n'
+            )
         return data
 
     def _collect_data(self, data):
