@@ -79,8 +79,8 @@ def load_seeds(fseeds):
     :param fseeds: path to JSON file
     :return: seeds object
     """
-    with open(fseeds) as f:
-        seeds = json.load(f)
+    with open(fseeds) as fobj:
+        seeds = json.load(fobj)
     jsonschema.validate(seeds, _SCHEMA)
     _validate(seeds, fseeds)
     return seeds
@@ -91,7 +91,7 @@ def _validate(seeds, fseeds):
     if len(_seeds) != len(set(s[GROUP_KEY] for s in _seeds)):
         raise SyntaxError(f"group names in {fseeds} are not unique")
     instance_types_set = set()
-    n = 0
+    num_instance_types = 0
     for seed in _seeds:
         candidates = seed[CANDIDATES_KEY]
         if len(candidates) != len(set(
@@ -102,8 +102,8 @@ def _validate(seeds, fseeds):
         for candidate in candidates:
             instance_types = candidate[INSTANCE_TYPES_KEY]
             instance_types_set |= set(instance_types)
-            n += len(instance_types)
-            if n != len(instance_types_set):
+            num_instance_types += len(instance_types)
+            if num_instance_types != len(instance_types_set):
                 raise SyntaxError("duplicate instance type found in "
                                   f"{fseeds}: {seed[GROUP_KEY]}/"
                                   f"{candidate[CANDIDATE_NAME_KEY]}")

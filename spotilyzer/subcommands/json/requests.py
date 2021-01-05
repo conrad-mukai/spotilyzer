@@ -74,8 +74,8 @@ def load_requests(frequests, require_group=False):
     :param require_group: flag to require group key in JSON document
     :return: requests object
     """
-    with open(frequests) as f:
-        requests = json.load(f)
+    with open(frequests) as fobj:
+        requests = json.load(fobj)
     jsonschema.validate(requests, _SCHEMA)
     _validate(requests, frequests, require_group)
     return requests
@@ -91,8 +91,8 @@ def save_requests(frequests, requests):
     """
     jsonschema.validate(requests, _SCHEMA)
     _validate(requests, frequests, True)
-    with open(frequests, 'w') as f:
-        json.dump(requests, f, indent=_JSON_INDENT)
+    with open(frequests, 'w') as fobj:
+        json.dump(requests, fobj, indent=_JSON_INDENT)
 
 
 def _validate(requests, frequests, require_group):

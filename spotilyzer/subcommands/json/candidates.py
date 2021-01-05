@@ -187,8 +187,8 @@ def save_candidates(fcandidates, candidates):
     """
     jsonschema.validate(candidates, _SCHEMA)
     _validate(candidates, fcandidates)
-    with open(fcandidates, 'w') as f:
-        json.dump(candidates, f, indent=_JSON_INDENT)
+    with open(fcandidates, 'w') as fobj:
+        json.dump(candidates, fobj, indent=_JSON_INDENT)
 
 
 def load_candidates(fcandidates):
@@ -197,8 +197,8 @@ def load_candidates(fcandidates):
     :param fcandidates: path to JSON file
     :return: candidates object
     """
-    with open(fcandidates) as f:
-        candidates = json.load(f)
+    with open(fcandidates) as fobj:
+        candidates = json.load(fobj)
     jsonschema.validate(candidates, _SCHEMA)
     _validate(candidates, fcandidates)
     return candidates
@@ -209,7 +209,7 @@ def _validate(candidates, fname):
     if len(groups) != len(set(g[GROUP_NAME_KEY] for g in groups)):
         raise SyntaxError(f"duplicate group name in {fname}")
     instance_types = set()
-    n = 0
+    num_instance_types = 0
     for group in groups:
         _candidates = group[CANDIDATES_KEY]
         if len(_candidates) != len(set(c[CANDIDATE_NAME_KEY]
@@ -220,8 +220,8 @@ def _validate(candidates, fname):
             add_set = set(p[INSTANCE_TYPE_KEY]
                           for p in candidate[CANDIDATE_POOLS_KEY])
             instance_types |= add_set
-            n += len(add_set)
-            if n != len(instance_types):
+            num_instance_types += len(add_set)
+            if num_instance_types != len(instance_types):
                 raise SyntaxError("duplicate instance types for "
                                   f"{group[GROUP_NAME_KEY]}/"
                                   f"{candidate[CANDIDATE_NAME_KEY]} in "

@@ -20,9 +20,9 @@ def main(argv=sys.argv):
     try:
         args = parse_cmdline(argv)
         run(args)
-    except SystemExit as e:
-        return e
-    except Exception as e:
-        print(f"[error]: {e}")
+    except SystemExit as exit_code:
+        return exit_code
+    except Exception as err:
+        print(f"[error]: {err}")
         return 1
     return 0

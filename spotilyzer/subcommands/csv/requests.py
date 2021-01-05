@@ -20,15 +20,15 @@ def load_requests(frequests):
     :return: requests object
     """
     request_list = []
-    with open(frequests) as f:
-        reader = csv.reader(f)
+    with open(frequests) as fobj:
+        reader = csv.reader(fobj)
         header = reader.__next__()
         _validate_header(header, frequests)
-        n = len(header)
+        rowlen = len(header)
         line = 2
         for row in reader:
-            _validate_row(n, row, frequests, line)
-            request = _get_request(n, header, row, frequests, line)
+            _validate_row(rowlen, row, frequests, line)
+            request = _get_request(rowlen, header, row, frequests, line)
             request_list.append(request)
             line += 1
     _validate_pod_names(request_list, frequests)
@@ -40,17 +40,17 @@ def _validate_header(header, frequests):
         raise SyntaxError(f"invalid header in {frequests}")
 
 
-def _validate_row(n, row, frequests, line):
-    if len(row) != n:
+def _validate_row(rowlen, row, frequests, line):
+    if len(row) != rowlen:
         raise SyntaxError("incorrect number of entries in "
                           f"{frequests}, line {line}")
 
 
-def _get_request(n, header, row, frequests, line):
+def _get_request(rowlen, header, row, frequests, line):
     try:
-        return {header[i]: _types[i](row[i]) for i in range(n)}
-    except ValueError as e:
-        raise SyntaxError(f"invalid type in {frequests}, line {line}") from e
+        return {header[i]: _types[i](row[i]) for i in range(rowlen)}
+    except ValueError as err:
+        raise SyntaxError(f"invalid type in {frequests}, line {line}") from err
 
 
 def _validate_pod_names(request_list, frequests):

@@ -25,8 +25,8 @@ def posint(string):
     """
     try:
         value = int(string)
-    except ValueError as e:
-        raise argparse.ArgumentTypeError(e)
+    except ValueError as err:
+        raise argparse.ArgumentTypeError(err)
     if value < 1:
         raise argparse.ArgumentTypeError(f"invalid value {string}: value must "
                                          "be greater than 0")
@@ -41,8 +41,8 @@ def posfloat(string):
     """
     try:
         value = float(string)
-    except ValueError as e:
-        raise argparse.ArgumentTypeError(e)
+    except ValueError as err:
+        raise argparse.ArgumentTypeError(err)
     if value < 0.0:
         raise argparse.ArgumentTypeError(f"invalid value {string}: value must "
                                          "be greater than or equal to 0.0")

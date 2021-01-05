@@ -84,11 +84,11 @@ class GroupRequests(SubCommand):
             math.sqrt(group_map[group_names[i]] * group_map[group_names[i - 1]])
             for i in range(1, len(group_names))
         ]
-        n = len(boundaries)
+        num_bdy = len(boundaries)
         for request in requests[REQUESTS_KEY]:
             mem_core_ratio = request[MEM_LIMIT_KEY] / request[CORE_LIMIT_KEY]
             found = False
-            for i in range(n):
+            for i in range(num_bdy):
                 if mem_core_ratio < boundaries[i]:
                     request[GROUP_NAME_KEY] = results[request[POD_NAME_KEY]] \
                         = group_names[i]

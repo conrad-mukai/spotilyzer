@@ -5,7 +5,6 @@ spotilyzer create-candidates subcommand
 # system imports
 import collections
 import datetime
-import math
 import heapq
 import sys
 import textwrap
@@ -17,7 +16,7 @@ import tabulate
 from .base import SubCommand
 from .utils.cli import options, posint, csv
 from .utils.paths import find_seeds_file
-from .utils.stats import quality
+from .utils.stats import quality, StatCollector
 from .json.seeds import load_seeds, SEEDS_KEY, GROUP_KEY, CANDIDATES_KEY, \
     CANDIDATE_NAME_KEY, INSTANCE_TYPES_KEY
 from .json.candidates import save_candidates, REGION_KEY, GROUPS_KEY, \
@@ -36,16 +35,11 @@ _MINPOOL_OPT = 'minpool'
 _MINPOOL_DEFAULT = 20
 _SEEDS_OPT = 'seeds'
 _CANDIDATES_ARG = 'candidates'
-_COUNT_KEY = 'count'
-_TOTAL_KEY = 'total'
-_SQUARE_TOTAL_KEY = 'square-total'
 _SPOT_FLEETS_KEY = 'spot-fleets'
 _AVG_MEM_CORE_RATIO_KEY = 'avg-mem-core-ratio'
 _FLEETS_KEY = 'fleets'
 _PRICE_KEY = 'price'
 _MIN_STAT_COUNT = 30
-_AVG_KEY = 'avg'
-_STDDEV_KEY = 'stddev'
 _RESOURCES_KEY = 'resources'
 _AVG_CORES_KEY = 'avg-cores'
 _AVG_MEM_KEY = 'avg-mem'
@@ -106,8 +100,8 @@ class CreateCandidates(SubCommand):
         seeds = self._get_seeds()
         data = self._start(seeds)
         timestamp = self._collect_data(data)
-        stats = self._compute_stats(data)
-        candidates = self._select_candidates(stats)
+        self._filter_data(data)
+        candidates = self._select_candidates(data)
         self._price_candidates(candidates)
         self._get_candidate_resources(candidates)
         results = self._save_candidates(candidates, timestamp)
@@ -156,8 +150,7 @@ class CreateCandidates(SubCommand):
                     = group_data[candidate[CANDIDATE_NAME_KEY]] = {}
                 for instance_type in candidate[INSTANCE_TYPES_KEY]:
                     instance_type_map[instance_type] \
-                        = instance_type_data[instance_type] \
-                        = collections.defaultdict(dict)
+                        = instance_type_data[instance_type] = {}
             for response in paginator.paginate(
                 LocationType='availability-zone',
                 Filters=[
@@ -176,11 +169,7 @@ class CreateCandidates(SubCommand):
                         offering['InstanceType']
                     ][
                         offering['Location']
-                    ] = {
-                        _COUNT_KEY: 0,
-                        _TOTAL_KEY: 0.0,
-                        _SQUARE_TOTAL_KEY: 0.0
-                    }
+                    ] = StatCollector()
             del_list = [
                 (c, i)
                 for c, g in group_data.items()
@@ -202,69 +191,45 @@ class CreateCandidates(SubCommand):
 
     def _collect_data(self, data):
         print("collecting spot price data...")
-        duration = self.getarg(_DURATION_OPT)
         end = datetime.datetime.now()
-        start = end - datetime.timedelta(days=duration)
+        start = end - datetime.timedelta(days=self.getarg(_DURATION_OPT))
         az_map = collections.defaultdict(dict)
         for group_data in data.values():
             for instance_type_data in group_data.values():
                 for instance_type, az_data in instance_type_data.items():
-                    for az, data_rec in az_data.items():
-                        az_map[az][instance_type] = data_rec
+                    for azone, data_rec in az_data.items():
+                        az_map[azone][instance_type] = data_rec
         paginator = self.client.get_paginator('describe_spot_price_history')
-        for az, az_map_data in az_map.items():
+        for azone, az_map_data in az_map.items():
             for response in paginator.paginate(
                 StartTime=start,
                 EndTime=end,
-                AvailabilityZone=az,
+                AvailabilityZone=azone,
                 InstanceTypes=list(az_map_data.keys()),
                 ProductDescriptions=["Linux/UNIX (Amazon VPC)"]
             ):
                 for history_rec in response['SpotPriceHistory']:
-                    data_rec = az_map_data[
-                        history_rec['InstanceType']
-                    ]
-                    data_rec[_COUNT_KEY] += 1
-                    price = float(history_rec['SpotPrice'])
-                    data_rec[_TOTAL_KEY] += price
-                    data_rec[_SQUARE_TOTAL_KEY] += price * price
-            record_count = sum(d[_COUNT_KEY] for d in az_map_data.values())
-            print(f"  {az}: {record_count} records")
+                    az_map_data[history_rec['InstanceType']].add(
+                        float(history_rec['SpotPrice'])
+                    )
+            print(f"  {azone}: {sum(d.count for d in az_map_data.values())} "
+                  "records")
         return end
 
-    def _compute_stats(self, data):
-        stats = {}
+    def _filter_data(self, data):
         del_list = []
-        for group, group_data in data.items():
-            group_stats = stats[group] = {}
-            for candidate, instance_type_data in group_data.items():
-                instance_type_stats = group_stats[candidate] = {}
-                del_set = set()
-                for instance_type, az_data in instance_type_data.items():
-                    az_stats = instance_type_stats[instance_type] = {}
-                    for az, data_rec in az_data.items():
-                        count = data_rec[_COUNT_KEY]
-                        if count < _MIN_STAT_COUNT:
-                            del_set.add(instance_type)
-                            continue
-                        total = data_rec[_TOTAL_KEY]
-                        avg = total / count
-                        variance = (data_rec[_SQUARE_TOTAL_KEY]
-                                    - total * avg) / (count - 1)
-                        if variance < 0.0:
-                            stddev = 0.0
-                        else:
-                            stddev = math.sqrt(variance)
-                        az_stats[az] = {
-                            _AVG_KEY: avg,
-                            _STDDEV_KEY: stddev
-                        }
+        for group_data in data.values():
+            for instance_type_data in group_data.values():
+                del_set = set(i
+                    for i, ad in instance_type_data.items()
+                    if any(d.count < _MIN_STAT_COUNT for d in ad.values())
+                )
                 for instance_type in del_set:
-                    del instance_type_stats[instance_type]
+                    del instance_type_data[instance_type]
                 del_list.extend(del_set)
-            self._cleanup_dict(group_stats)
-        self._cleanup_dict(stats)
-        if len(stats) == 0:
+            self._cleanup_dict(group_data)
+        self._cleanup_dict(data)
+        if len(data) == 0:
             raise RuntimeError("duration too short to collect any "
                                "statistically significant samples")
         if len(del_list) > 0:
@@ -276,57 +241,59 @@ class CreateCandidates(SubCommand):
                         f"{', '.join(del_list)}"
                 ), '\n'
             )
-        return stats
 
     @staticmethod
-    def _cleanup_dict(stats_dict):
-        del_list = [k for k,v in stats_dict.items() if len(v) == 0]
+    def _cleanup_dict(data_dict):
+        del_list = [k for k,v in data_dict.items() if len(v) == 0]
         for key in del_list:
-            del stats_dict[key]
+            del data_dict[key]
 
-    def _select_candidates(self, stats):
+    def _select_candidates(self, data):
         print("selecting candidates...")
         minpool = self.getarg(_MINPOOL_OPT)
         candidates = {}
-        for group, group_stats in stats.items():
+        for group, group_data in data.items():
             spot_candidates = {}
             candidates[group] = {
                 _SPOT_FLEETS_KEY: spot_candidates,
                 _AVG_MEM_CORE_RATIO_KEY: None
             }
-            for candidate, instance_type_stats in group_stats.items():
+            for candidate, instance_type_data in group_data.items():
                 fleet_candidates = {}
                 spot_candidates[candidate] = {
                     _FLEETS_KEY: fleet_candidates,
                     _RESOURCES_KEY: {},
                     _PRICE_KEY: None
                 }
-                count = sum(len(a) for a in instance_type_stats.values())
-                if count <= minpool:
-                    fleet_candidates.update(instance_type_stats)
+                if sum(len(a) for a in instance_type_data.values()) <= minpool:
+                    for instance_type, az_data in instance_type_data.items():
+                        fleet_candidates[instance_type] \
+                            = self._convert_azdata(az_data)
                     continue
                 heap = []
-                count = 0
-                for instance_type, az_stats in instance_type_stats.items():
+                for instance_type, az_data in instance_type_data.items():
                     dyn_price = sum(
-                        i[_AVG_KEY]+i[_STDDEV_KEY]
-                        for i in az_stats.values()
-                    ) / len(az_stats)
+                        sum(i.eval()) for i in az_data.values()
+                    ) / len(az_data)
                     heapq.heappush(heap, (dyn_price, instance_type))
-                n = minpool - count
-                while n > 0:
+                pool_count = 0
+                while pool_count < minpool:
                     item = heapq.heappop(heap)
-                    pool_stat = instance_type_stats[item[1]]
-                    fleet_candidates[item[1]] = pool_stat
-                    n -= len(pool_stat)
+                    az_data = instance_type_data[item[1]]
+                    fleet_candidates[item[1]] = self._convert_azdata(az_data)
+                    pool_count += len(az_data)
         return candidates
+
+    @staticmethod
+    def _convert_azdata(az_data):
+        return {az: s.eval()[0] for az, s in az_data.items()}
 
     @staticmethod
     def _price_candidates(candidates):
         for candidate_record in candidates.values():
             for spot_candidate in candidate_record[_SPOT_FLEETS_KEY].values():
                 total = sum(
-                    s[_AVG_KEY]
+                    s
                     for p in spot_candidate[_FLEETS_KEY].values()
                     for s in p.values()
                 )
@@ -339,17 +306,12 @@ class CreateCandidates(SubCommand):
         print("getting candidate resources...")
         paginator = self.client.get_paginator('describe_instance_types')
         for group, candidate_record in candidates.items():
-            spot_fleet_count = 0
-            mem_core_ratio_total = 0.0
-            mem_core_ratio_square_total = 0.0
+            mcstats = StatCollector()
             for candidate, spot_candidate in candidate_record[
                 _SPOT_FLEETS_KEY
             ].items():
-                count = 0
-                core_total = 0.0
-                core_square_total = 0.0
-                mem_total = 0.0
-                mem_square_total = 0.0
+                cstats = StatCollector()
+                mstats = StatCollector()
                 core_min = sys.float_info.max
                 mem_min = sys.float_info.max
                 fleets = spot_candidate[_FLEETS_KEY]
@@ -357,44 +319,35 @@ class CreateCandidates(SubCommand):
                     InstanceTypes=list(fleets.keys())
                 ):
                     for instance_type_data in response['InstanceTypes']:
-                        weight = len(
-                            fleets[instance_type_data['InstanceType']]
-                        )
-                        count += weight
                         cores = instance_type_data['VCpuInfo']['DefaultVCpus']
                         mem = instance_type_data['MemoryInfo']['SizeInMiB']
-                        core_total += weight * cores
-                        core_square_total += weight * cores * cores
-                        mem_total += weight * mem
-                        mem_square_total += weight * mem * mem
+                        mem_core_ratio = mem / cores
+                        for i in range(
+                            len(fleets[instance_type_data['InstanceType']])
+                        ):
+                            cstats.add(cores)
+                            mstats.add(mem)
+                            mcstats.add(mem_core_ratio)
                         core_min = min(cores, core_min)
                         mem_min = min(mem, mem_min)
-                        mem_core_ratio = mem / cores
-                        mem_core_ratio_total += weight * mem_core_ratio
-                        mem_core_ratio_square_total \
-                            += weight * mem_core_ratio * mem_core_ratio
-                if not quality(count, core_total, core_square_total,
-                               _COV_LEVEL):
+                if not quality(cstats, _COV_LEVEL):
                     print(f"[warning]: cores for {group}/{candidate} have a "
                           "large variance")
-                if not quality(count, mem_total, mem_square_total, _COV_LEVEL):
+                if not quality(mstats, _COV_LEVEL):
                     print(f"[warning]: memories for {group}/{candidate} have "
                           "a large variance")
                 spot_candidate[_RESOURCES_KEY].update(
                     {
-                        _AVG_CORES_KEY: core_total / count,
-                        _AVG_MEM_KEY: mem_total / count,
+                        _AVG_CORES_KEY: cstats.eval(sampled=False)[0],
+                        _AVG_MEM_KEY: mstats.eval(sampled=False)[0],
                         _MIN_CORES_KEY: core_min,
                         _MIN_MEM_KEY: mem_min
                     }
                 )
-                spot_fleet_count += count
-            if not quality(spot_fleet_count, mem_core_ratio_total,
-                           mem_core_ratio_square_total, _COV_LEVEL):
+            if not quality(mcstats, _COV_LEVEL):
                 print(f"[warning]: memory/core ratios for {group} have a "
                       "large variance")
-            candidate_record[_AVG_MEM_CORE_RATIO_KEY] \
-                = mem_core_ratio_total / spot_fleet_count
+            candidate_record[_AVG_MEM_CORE_RATIO_KEY] = mcstats.eval()[0]
 
     def _save_candidates(self, candidates, timestamp):
         group_list = []
