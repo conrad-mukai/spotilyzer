@@ -38,11 +38,19 @@ _TABLE_COL_ALIGN = ('left', 'left', 'right', 'right')
 
 
 class SizeFleets(SubCommand):
+    """
+    size-fleets subcommand
+    """
 
     name = 'size-fleets'
 
     @classmethod
     def add_parser(cls, subparsers):
+        """
+        Add size-fleets subcommand parser.
+        :param subparsers: object to attach parser
+        :return: None
+        """
         parser = subparsers.add_parser(cls.name, description=_DESCRIPTION,
                                        help=_DESCRIPTION)
         parser.add_argument(*options(_BUFFER_OPT), type=posfloat,
@@ -54,6 +62,11 @@ class SizeFleets(SubCommand):
                             help="file containing grouped requests")
 
     def run(self):
+        """
+        Generate instance count and price estimates from candidates and
+        requests.
+        :return: None
+        """
         groups, candidates = self._get_groups()
         requirements = self._get_requirements()
         results = self._size_fleets(groups, requirements)

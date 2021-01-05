@@ -30,11 +30,19 @@ _TABLE_HEADER = ('Pod', 'Group')
 
 
 class GroupRequests(SubCommand):
+    """
+    group-requests subcommand
+    """
 
     name = 'group-requests'
 
     @classmethod
     def add_parser(cls, subparsers):
+        """
+        Add group-requests subcommand parser.
+        :param subparsers: object to attach parser
+        :return: None
+        """
         parser = subparsers.add_parser(cls.name, description=_DESCRIPTION,
                                        help=_DESCRIPTION)
         parser.add_argument(*options(_FORMAT_OPT),
@@ -48,6 +56,10 @@ class GroupRequests(SubCommand):
                             help="output JSON file with grouped requests")
 
     def run(self):
+        """
+        Add groups to pod requests.
+        :return: None
+        """
         groups = load_candidates(self.getarg(_CANDIDATES_ARG))[GROUPS_KEY]
         requests = self._get_requests()
         results = self._group_requests(groups, requests)
@@ -56,13 +68,11 @@ class GroupRequests(SubCommand):
 
     def _get_requests(self):
         request_format = self.getarg(_FORMAT_OPT)
-        if request_format == _JSON_FMT:
-            return json_requests(self.getarg(_REQUESTS_ARG))
         if request_format == _CSV_FMT:
             return csv_requests(self.getarg(_REQUESTS_ARG))
-        else:
-            raise NotImplementedError(f"format {request_format} not "
-                                      "implemented")
+        if request_format == _JSON_FMT:
+            return json_requests(self.getarg(_REQUESTS_ARG))
+        raise NotImplementedError(f"format {request_format} not implemented")
 
     @staticmethod
     def _group_requests(groups, requests):

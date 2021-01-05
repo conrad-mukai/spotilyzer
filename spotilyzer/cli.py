@@ -14,6 +14,12 @@ SUBCOMMAND_ARG = 'subcommand'
 
 
 def parse_cmdline(argv):
+    """
+    Convert command line arguments to a argparse Namespace. Load subparsers
+    from each subcommand.
+    :param argv: list of command line arguments
+    :return: argparse Namespace
+    """
     parser = argparse.ArgumentParser(description="AWS spot fleet analyzer")
     subparsers = parser.add_subparsers(
         dest=SUBCOMMAND_ARG,

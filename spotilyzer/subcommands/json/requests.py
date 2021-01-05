@@ -68,6 +68,12 @@ _JSON_INDENT = 2
 
 
 def load_requests(frequests, require_group=False):
+    """
+    Load requests JSON file. Schema and consistency checks are performed.
+    :param frequests: path to JSON file
+    :param require_group: flag to require group key in JSON document
+    :return: requests object
+    """
     with open(frequests) as f:
         requests = json.load(f)
     jsonschema.validate(requests, _SCHEMA)
@@ -76,6 +82,13 @@ def load_requests(frequests, require_group=False):
 
 
 def save_requests(frequests, requests):
+    """
+    Save a requests object to a JSON file. Schema and consistency checks are
+    performed before saving.
+    :param frequests: path to output JSON file
+    :param requests: requests object
+    :return: None
+    """
     jsonschema.validate(requests, _SCHEMA)
     _validate(requests, frequests, True)
     with open(frequests, 'w') as f:

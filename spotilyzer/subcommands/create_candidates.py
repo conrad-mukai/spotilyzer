@@ -59,11 +59,19 @@ _TABLE_FLOAT_FORMAT = '.3f'
 
 
 class CreateCandidates(SubCommand):
+    """
+    create-candidates subcommand
+    """
 
     name = 'create-candidates'
 
     @classmethod
     def add_parser(cls, subparsers):
+        """
+        Add create-candidates subcommand parser.
+        :param subparsers: object to attach parser
+        :return: None
+        """
         parser = subparsers.add_parser(cls.name, description=_DESCRIPTION,
                                        help=_DESCRIPTION)
         parser.add_argument(*options(_REGION_OPT), default=None,
@@ -90,6 +98,10 @@ class CreateCandidates(SubCommand):
                             help="JSON file for candidates output")
 
     def run(self):
+        """
+        Create candidates from a seed file and spot price history data.
+        :return: None
+        """
         self._set_region()
         seeds = self._get_seeds()
         data = self._start(seeds)

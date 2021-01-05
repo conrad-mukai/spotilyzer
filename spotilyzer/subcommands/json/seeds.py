@@ -74,6 +74,11 @@ _SCHEMA = {
 
 
 def load_seeds(fseeds):
+    """
+    Load seeds JSON file. Perform schema and consistency checks.
+    :param fseeds: path to JSON file
+    :return: seeds object
+    """
     with open(fseeds) as f:
         seeds = json.load(f)
     jsonschema.validate(seeds, _SCHEMA)

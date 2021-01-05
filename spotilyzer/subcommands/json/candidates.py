@@ -178,6 +178,13 @@ _JSON_INDENT = 2
 
 
 def save_candidates(fcandidates, candidates):
+    """
+    Save candidates object to a JSON file. Schema and consistency checks are
+    performed before saving.
+    :param fcandidates: path to output file
+    :param candidates: candidates object
+    :return: None
+    """
     jsonschema.validate(candidates, _SCHEMA)
     _validate(candidates, fcandidates)
     with open(fcandidates, 'w') as f:
@@ -185,6 +192,11 @@ def save_candidates(fcandidates, candidates):
 
 
 def load_candidates(fcandidates):
+    """
+    Load candidates JSON file. Perform schema and consistency checks.
+    :param fcandidates: path to JSON file
+    :return: candidates object
+    """
     with open(fcandidates) as f:
         candidates = json.load(f)
     jsonschema.validate(candidates, _SCHEMA)

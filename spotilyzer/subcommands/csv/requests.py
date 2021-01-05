@@ -14,6 +14,11 @@ _types = (str, int, float, float)
 
 
 def load_requests(frequests):
+    """
+    Load requests CSV file. Formatting checks are performed
+    :param frequests: path to CSV file.
+    :return: requests object
+    """
     request_list = []
     with open(frequests) as f:
         reader = csv.reader(f)
