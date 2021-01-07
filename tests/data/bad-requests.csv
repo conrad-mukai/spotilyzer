@@ -1,0 +1,2 @@
+pod-name,replicas,core-limit,mem-limit
+web-app-a,x,2,4

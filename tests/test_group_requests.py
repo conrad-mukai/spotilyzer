@@ -28,3 +28,26 @@ class GroupRequestsTestCase(BaseTestCase):
         with open(output) as f:
             results = json.load(f)
         self.assertEqual(expected, results)
+
+    def test_json_format(self):
+        output = os.path.join(self.results_dir, 'requests.json')
+        self.assertEqual(main([
+            'spotilyzer', 'group-requests',
+            '-f', 'json',
+            os.path.join(self.expected_dir, 'nominal.json'),
+            os.path.join(self.data_dir, 'requests.json'),
+            output
+        ]), 0)
+        with open(os.path.join(self.expected_dir, 'requests.json')) as f:
+            expected = json.load(f)
+        with open(output) as f:
+            results = json.load(f)
+        self.assertEqual(expected, results)
+
+    def test_bad_request(self):
+        self.assertNotEqual(main([
+            'spotilyzer', 'group-requests',
+            os.path.join(self.expected_dir, 'nominal.json'),
+            os.path.join(self.data_dir, 'bad-requests.csv'),
+            'no-output.json'
+        ]), 0)
