@@ -111,26 +111,30 @@ class SizeFleets(SubCommand):
         results = {}
         buffer = 1 + self.getarg(_BUFFER_OPT) / 100
         for group_name, fleets in groups.items():
-            group_data = results[group_name] = {}
-            requirement = requirements[group_name]
-            required_cores = buffer * requirement[_MAX_CORES_KEY]
-            required_mem = buffer * requirement[_MAX_MEM_KEY]
-            total_cores = buffer * requirement[_TOTAL_CORES_KEY]
-            total_mem = buffer * requirement[_TOTAL_MEM_KEY]
-            for fleet_name, fleet_data in fleets.items():
-                resources = fleet_data[RESOURCES_KEY]
-                if required_cores > resources[MIN_CORES_KEY] \
-                   or required_mem > resources[MIN_MEMORY_KEY]:
-                    continue
-                count = max(
-                    math.ceil(total_cores / resources[AVG_CORES_KEY]),
-                    math.ceil(total_mem / resources[AVG_MEMORY_KEY])
-                )
-                group_data[fleet_name] = {
-                    _INSTANCE_COUNT: count,
-                    _TOTAL_COST: count * fleet_data[PRICE_KEY]
-                }
+            self._set_fleets(results, buffer, requirements, group_name, fleets)
         return results
+
+    @staticmethod
+    def _set_fleets(results, buffer, requirements, group_name, fleets):
+        group_data = results[group_name] = {}
+        requirement = requirements[group_name]
+        required_cores = buffer * requirement[_MAX_CORES_KEY]
+        required_mem = buffer * requirement[_MAX_MEM_KEY]
+        total_cores = buffer * requirement[_TOTAL_CORES_KEY]
+        total_mem = buffer * requirement[_TOTAL_MEM_KEY]
+        for fleet_name, fleet_data in fleets.items():
+            resources = fleet_data[RESOURCES_KEY]
+            if required_cores > resources[MIN_CORES_KEY] \
+                    or required_mem > resources[MIN_MEMORY_KEY]:
+                continue
+            count = max(
+                math.ceil(total_cores / resources[AVG_CORES_KEY]),
+                math.ceil(total_mem / resources[AVG_MEMORY_KEY])
+            )
+            group_data[fleet_name] = {
+                _INSTANCE_COUNT: count,
+                _TOTAL_COST: count * fleet_data[PRICE_KEY]
+            }
 
     def _display_results(self, results, candidates):
         sorted_fleets = {

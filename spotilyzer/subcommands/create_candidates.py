@@ -124,7 +124,7 @@ class CreateCandidates(SubCommand):
             availability_zones = self._get_azs()
         else:
             self._validate_azs(availability_zones)
-        return self._get_instance_type_offerings(seeds, availability_zones)
+        return self._start_seed_data(seeds, availability_zones)
 
     def _get_azs(self):
         response = self.client.describe_availability_zones()
@@ -138,20 +138,17 @@ class CreateCandidates(SubCommand):
                              f"{self.client.meta.region_name}: "
                              f"{','.join(invalid_azs)}")
 
-    def _get_instance_type_offerings(self, seeds, availability_zones):
+    def _start_seed_data(self, seeds, availability_zones):
         data = {}
         del_list = []
         for seed in seeds[SEEDS_KEY]:
             group_data = data[seed[GROUP_KEY]] = {}
-            instance_type_map = {}
+            instance_type_map = self._map_instance_type_data(
+                group_data,
+                seed[CANDIDATES_KEY]
+            )
             paginator \
                 = self.client.get_paginator('describe_instance_type_offerings')
-            for candidate in seed[CANDIDATES_KEY]:
-                instance_type_data \
-                    = group_data[candidate[CANDIDATE_NAME_KEY]] = {}
-                for instance_type in candidate[INSTANCE_TYPES_KEY]:
-                    instance_type_map[instance_type] \
-                        = instance_type_data[instance_type] = {}
             for response in paginator.paginate(
                 LocationType='availability-zone',
                 Filters=[
@@ -190,6 +187,17 @@ class CreateCandidates(SubCommand):
                 ), '\n'
             )
         return data
+
+    @staticmethod
+    def _map_instance_type_data(group_data, candidates):
+        instance_type_map = {}
+        for candidate in candidates:
+            instance_type_data \
+                = group_data[candidate[CANDIDATE_NAME_KEY]] = {}
+            for instance_type in candidate[INSTANCE_TYPES_KEY]:
+                instance_type_map[instance_type] \
+                    = instance_type_data[instance_type] = {}
+        return instance_type_map
 
     def _collect_data(self, data):
         print("collecting spot price data...")
@@ -272,19 +280,23 @@ class CreateCandidates(SubCommand):
                         fleet_candidates[instance_type] \
                             = self._convert_azdata(az_data)
                     continue
-                heap = []
-                for instance_type, az_data in instance_type_data.items():
-                    dyn_price = sum(
-                        sum(i.eval()) for i in az_data.values()
-                    ) / len(az_data)
-                    heapq.heappush(heap, (dyn_price, instance_type))
-                pool_count = 0
-                while pool_count < minpool:
-                    item = heapq.heappop(heap)
-                    az_data = instance_type_data[item[1]]
-                    fleet_candidates[item[1]] = self._convert_azdata(az_data)
-                    pool_count += len(az_data)
+                self._select_nsmallest(fleet_candidates, instance_type_data,
+                                       minpool)
         return candidates
+
+    def _select_nsmallest(self, fleet_candidates, instance_type_data, minpool):
+        heap = []
+        for instance_type, az_data in instance_type_data.items():
+            dyn_price = sum(
+                sum(i.eval()) for i in az_data.values()
+            ) / len(az_data)
+            heapq.heappush(heap, (dyn_price, instance_type))
+        pool_count = 0
+        while pool_count < minpool:
+            item = heapq.heappop(heap)
+            az_data = instance_type_data[item[1]]
+            fleet_candidates[item[1]] = self._convert_azdata(az_data)
+            pool_count += len(az_data)
 
     @staticmethod
     def _convert_azdata(az_data):
@@ -312,44 +324,49 @@ class CreateCandidates(SubCommand):
             for candidate, spot_candidate in candidate_record[
                 _SPOT_FLEETS_KEY
             ].items():
-                cstats = StatCollector()
-                mstats = StatCollector()
-                core_min = sys.float_info.max
-                mem_min = sys.float_info.max
-                fleets = spot_candidate[_FLEETS_KEY]
-                for response in paginator.paginate(
-                    InstanceTypes=list(fleets.keys())
-                ):
-                    for instance_type_data in response['InstanceTypes']:
-                        cores = instance_type_data['VCpuInfo']['DefaultVCpus']
-                        mem = instance_type_data['MemoryInfo']['SizeInMiB']
-                        mem_core_ratio = mem / cores
-                        for i in range(
-                            len(fleets[instance_type_data['InstanceType']])
-                        ):
-                            cstats.add(cores)
-                            mstats.add(mem)
-                            mcstats.add(mem_core_ratio)
-                        core_min = min(cores, core_min)
-                        mem_min = min(mem, mem_min)
-                if not quality(cstats, _COV_LEVEL):
-                    print(f"[warning]: cores for {group}/{candidate} have a "
-                          "large variance")
-                if not quality(mstats, _COV_LEVEL):
-                    print(f"[warning]: memories for {group}/{candidate} have "
-                          "a large variance")
-                spot_candidate[_RESOURCES_KEY].update(
-                    {
-                        _AVG_CORES_KEY: cstats.eval(sampled=False)[0],
-                        _AVG_MEM_KEY: mstats.eval(sampled=False)[0],
-                        _MIN_CORES_KEY: core_min,
-                        _MIN_MEM_KEY: mem_min
-                    }
-                )
+                self._compute_resource_stats(paginator, group, candidate,
+                                             spot_candidate, mcstats)
             if not quality(mcstats, _COV_LEVEL):
                 print(f"[warning]: memory/core ratios for {group} have a "
                       "large variance")
             candidate_record[_AVG_MEM_CORE_RATIO_KEY] = mcstats.eval()[0]
+
+    @staticmethod
+    def _compute_resource_stats(paginator, group, candidate, spot_candidate,
+                                mcstats):
+        cstats = StatCollector()
+        mstats = StatCollector()
+        core_min = sys.float_info.max
+        mem_min = sys.float_info.max
+        fleets = spot_candidate[_FLEETS_KEY]
+        for response in paginator.paginate(
+                InstanceTypes=list(fleets.keys())
+        ):
+            for instance_type_data in response['InstanceTypes']:
+                cores = instance_type_data['VCpuInfo']['DefaultVCpus']
+                mem = instance_type_data['MemoryInfo']['SizeInMiB']
+                weight = len(
+                    fleets[instance_type_data['InstanceType']]
+                )
+                cstats.weighted_add(cores, weight)
+                mstats.weighted_add(mem, weight)
+                mcstats.weighted_add(mem / cores, weight)
+                core_min = min(cores, core_min)
+                mem_min = min(mem, mem_min)
+        if not quality(cstats, _COV_LEVEL):
+            print(f"[warning]: cores for {group}/{candidate} have a "
+                  "large variance")
+        if not quality(mstats, _COV_LEVEL):
+            print(f"[warning]: memories for {group}/{candidate} have "
+                  "a large variance")
+        spot_candidate[_RESOURCES_KEY].update(
+            {
+                _AVG_CORES_KEY: cstats.eval(sampled=False)[0],
+                _AVG_MEM_KEY: mstats.eval(sampled=False)[0],
+                _MIN_CORES_KEY: core_min,
+                _MIN_MEM_KEY: mem_min
+            }
+        )
 
     def _save_candidates(self, candidates, timestamp):
         group_list = []

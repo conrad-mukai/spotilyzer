@@ -26,6 +26,17 @@ class StatCollector:
         self.total += value
         self.square_total += value * value
 
+    def weighted_add(self, value, weight):
+        """
+        Add data point with weight to population
+        :param value: data value
+        :param weight: weight to apply to data value
+        :return: None
+        """
+        self.count += weight
+        self.total += weight * value
+        self.square_total += weight * value * value
+
     def eval(self, sampled=True):
         """
         Compute average and standard deviation. Values are cached so any data
@@ -56,6 +67,7 @@ def quality(stat_collector, cov_level):
     """
     Determine if variance is within an acceptable level.
     :param stat_collector: StatCollector object
+    :param cov_level: acceptable limit for coefficient of variation
     :return: True if coefficient of variation is within acceptable limit
     """
     avg, stddev =  stat_collector.eval(sampled=False)
