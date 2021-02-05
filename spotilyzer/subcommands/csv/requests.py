@@ -20,7 +20,7 @@ def load_requests(frequests):
     :return: requests object
     """
     request_list = []
-    with open(frequests) as fobj:
+    with open(frequests, mode='r', encoding='utf-8-sig') as fobj:
         reader = csv.reader(fobj)
         header = reader.__next__()
         _validate_header(header, frequests)
