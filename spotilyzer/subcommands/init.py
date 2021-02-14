@@ -12,7 +12,6 @@ from .utils.paths import get_package_datadir, get_user_datadir, SEEDS_FILE
 
 # constants
 _DESCRIPTION = "initialize spotilyzer"
-_SEEDS_FILE = 'seeds.json'
 
 
 class Init(SubCommand):

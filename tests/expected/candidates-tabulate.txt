@@ -1,0 +1,187 @@
+
+region: us-west-2
+metadata:
+  timestamp: 2021-01-01T22:14:13.120426
+  duration: 30 days
+  minpool: 20
+
+group: compute
++-------------+---------+-----------------+---------------------------------------------+
+| Candidate   |   Price | Instance Type   | Availability Zones                          |
++=============+=========+=================+=============================================+
+| large       |   0.039 | c5d.large       | us-west-2d,us-west-2b,us-west-2c,us-west-2a |
+|             |         | c4.large        | us-west-2b,us-west-2c,us-west-2a            |
+|             |         | c5n.large       | us-west-2c,us-west-2a,us-west-2b            |
+|             |         | c5.large        | us-west-2c,us-west-2b,us-west-2a,us-west-2d |
+|             |         | c5a.large       | us-west-2a,us-west-2d,us-west-2b,us-west-2c |
+|             |         | c5ad.large      | us-west-2d,us-west-2b,us-west-2a            |
++-------------+---------+-----------------+---------------------------------------------+
+| xlarge      |   0.070 | c5ad.xlarge     | us-west-2a,us-west-2b,us-west-2d            |
+|             |         | c4.xlarge       | us-west-2b,us-west-2c,us-west-2a            |
+|             |         | c5.xlarge       | us-west-2b,us-west-2d,us-west-2c,us-west-2a |
+|             |         | c5n.xlarge      | us-west-2c,us-west-2a,us-west-2b            |
+|             |         | c5d.xlarge      | us-west-2c,us-west-2d,us-west-2a,us-west-2b |
+|             |         | c5a.xlarge      | us-west-2d,us-west-2b,us-west-2c,us-west-2a |
++-------------+---------+-----------------+---------------------------------------------+
+| 2xlarge     |   0.150 | c5ad.2xlarge    | us-west-2b,us-west-2d,us-west-2a            |
+|             |         | c5d.2xlarge     | us-west-2b,us-west-2d,us-west-2a,us-west-2c |
+|             |         | c5.2xlarge      | us-west-2b,us-west-2c,us-west-2a,us-west-2d |
+|             |         | c5n.2xlarge     | us-west-2c,us-west-2b,us-west-2a            |
+|             |         | c5a.2xlarge     | us-west-2d,us-west-2c,us-west-2b,us-west-2a |
+|             |         | c4.2xlarge      | us-west-2c,us-west-2b,us-west-2a            |
++-------------+---------+-----------------+---------------------------------------------+
+| 4xlarge     |   0.331 | c5.4xlarge      | us-west-2b,us-west-2c,us-west-2d,us-west-2a |
+|             |         | c4.4xlarge      | us-west-2a,us-west-2b,us-west-2c            |
+|             |         | c5ad.4xlarge    | us-west-2d,us-west-2a,us-west-2b            |
+|             |         | c5a.4xlarge     | us-west-2d,us-west-2c,us-west-2a,us-west-2b |
+|             |         | c5d.4xlarge     | us-west-2d,us-west-2a,us-west-2b,us-west-2c |
+|             |         | c5n.4xlarge     | us-west-2c,us-west-2b,us-west-2a            |
++-------------+---------+-----------------+---------------------------------------------+
+| 8xlarge     |   0.618 | c4.8xlarge      | us-west-2b,us-west-2c,us-west-2a            |
+|             |         | c5a.8xlarge     | us-west-2d,us-west-2a,us-west-2c,us-west-2b |
+|             |         | c5.9xlarge      | us-west-2b,us-west-2a,us-west-2d,us-west-2c |
+|             |         | c5d.9xlarge     | us-west-2c,us-west-2a,us-west-2b,us-west-2d |
+|             |         | c5n.9xlarge     | us-west-2c,us-west-2b,us-west-2a            |
+|             |         | c5ad.8xlarge    | us-west-2d,us-west-2b,us-west-2a            |
++-------------+---------+-----------------+---------------------------------------------+
+| 12xlarge    |   0.961 | c5.12xlarge     | us-west-2b,us-west-2d,us-west-2a,us-west-2c |
+|             |         | c5d.12xlarge    | us-west-2a,us-west-2c,us-west-2d,us-west-2b |
+|             |         | c5a.12xlarge    | us-west-2d,us-west-2a,us-west-2c,us-west-2b |
+|             |         | c5ad.12xlarge   | us-west-2d,us-west-2a,us-west-2b            |
++-------------+---------+-----------------+---------------------------------------------+
+| 16xlarge    |   1.292 | c5.18xlarge     | us-west-2d,us-west-2c,us-west-2a,us-west-2b |
+|             |         | c5d.18xlarge    | us-west-2c,us-west-2d,us-west-2b,us-west-2a |
+|             |         | c5a.16xlarge    | us-west-2c,us-west-2d,us-west-2a,us-west-2b |
+|             |         | c5ad.16xlarge   | us-west-2d,us-west-2b,us-west-2a            |
+|             |         | c5n.18xlarge    | us-west-2c,us-west-2b,us-west-2a            |
++-------------+---------+-----------------+---------------------------------------------+
+| 24xlarge    |   1.630 | c5.24xlarge     | us-west-2b,us-west-2c,us-west-2a,us-west-2d |
+|             |         | c5d.24xlarge    | us-west-2b,us-west-2a,us-west-2c,us-west-2d |
+|             |         | c5a.24xlarge    | us-west-2c,us-west-2d,us-west-2b,us-west-2a |
+|             |         | c5ad.24xlarge   | us-west-2a,us-west-2b,us-west-2d            |
++-------------+---------+-----------------+---------------------------------------------+
+
+group: general
++-------------+---------+-----------------+---------------------------------------------+
+| Candidate   |   Price | Instance Type   | Availability Zones                          |
++=============+=========+=================+=============================================+
+| large       |   0.037 | m5d.large       | us-west-2a,us-west-2b,us-west-2c,us-west-2d |
+|             |         | m5dn.large      | us-west-2a,us-west-2b,us-west-2c            |
+|             |         | m5.large        | us-west-2a,us-west-2c,us-west-2d,us-west-2b |
+|             |         | m5a.large       | us-west-2b,us-west-2a,us-west-2d,us-west-2c |
+|             |         | m5n.large       | us-west-2b,us-west-2c,us-west-2a            |
+|             |         | m5ad.large      | us-west-2b,us-west-2a,us-west-2c,us-west-2d |
++-------------+---------+-----------------+---------------------------------------------+
+| xlarge      |   0.078 | m4.xlarge       | us-west-2c,us-west-2a,us-west-2b            |
+|             |         | m5d.xlarge      | us-west-2b,us-west-2a,us-west-2c,us-west-2d |
+|             |         | m5.xlarge       | us-west-2d,us-west-2a,us-west-2b,us-west-2c |
+|             |         | m5n.xlarge      | us-west-2a,us-west-2c,us-west-2b            |
+|             |         | m5ad.xlarge     | us-west-2a,us-west-2c,us-west-2b,us-west-2d |
+|             |         | m5a.xlarge      | us-west-2d,us-west-2c,us-west-2b,us-west-2a |
++-------------+---------+-----------------+---------------------------------------------+
+| 2xlarge     |   0.198 | m4.2xlarge      | us-west-2b,us-west-2c,us-west-2a            |
+|             |         | m5.2xlarge      | us-west-2d,us-west-2a,us-west-2c,us-west-2b |
+|             |         | m5a.2xlarge     | us-west-2c,us-west-2a,us-west-2b,us-west-2d |
+|             |         | m5d.2xlarge     | us-west-2d,us-west-2a,us-west-2c,us-west-2b |
+|             |         | m5ad.2xlarge    | us-west-2d,us-west-2b,us-west-2c,us-west-2a |
+|             |         | m5n.2xlarge     | us-west-2a,us-west-2c,us-west-2b            |
++-------------+---------+-----------------+---------------------------------------------+
+| 4xlarge     |   0.348 | m5.4xlarge      | us-west-2a,us-west-2b,us-west-2c,us-west-2d |
+|             |         | m4.4xlarge      | us-west-2a,us-west-2c,us-west-2b            |
+|             |         | m5ad.4xlarge    | us-west-2c,us-west-2b,us-west-2d,us-west-2a |
+|             |         | m5d.4xlarge     | us-west-2c,us-west-2d,us-west-2a,us-west-2b |
+|             |         | m5a.4xlarge     | us-west-2d,us-west-2c,us-west-2a,us-west-2b |
+|             |         | m5n.4xlarge     | us-west-2a,us-west-2c,us-west-2b            |
++-------------+---------+-----------------+---------------------------------------------+
+| 8xlarge     |   0.803 | m5.8xlarge      | us-west-2b,us-west-2c,us-west-2a,us-west-2d |
+|             |         | m5d.8xlarge     | us-west-2a,us-west-2c,us-west-2b,us-west-2d |
+|             |         | m5a.8xlarge     | us-west-2d,us-west-2b,us-west-2c,us-west-2a |
+|             |         | m5ad.8xlarge    | us-west-2d                                  |
+|             |         | m5n.8xlarge     | us-west-2c,us-west-2b,us-west-2a            |
+|             |         | m5dn.8xlarge    | us-west-2c,us-west-2b,us-west-2a            |
++-------------+---------+-----------------+---------------------------------------------+
+| 12xlarge    |   1.087 | m5.12xlarge     | us-west-2b,us-west-2d,us-west-2c,us-west-2a |
+|             |         | m4.10xlarge     | us-west-2c,us-west-2a,us-west-2b            |
+|             |         | m5a.12xlarge    | us-west-2b,us-west-2a,us-west-2d,us-west-2c |
+|             |         | m5ad.12xlarge   | us-west-2a,us-west-2d,us-west-2c,us-west-2b |
+|             |         | m5d.12xlarge    | us-west-2c,us-west-2b,us-west-2d,us-west-2a |
+|             |         | m5n.12xlarge    | us-west-2a,us-west-2b,us-west-2c            |
++-------------+---------+-----------------+---------------------------------------------+
+| 16xlarge    |   1.538 | m5ad.16xlarge   | us-west-2d                                  |
+|             |         | m5.16xlarge     | us-west-2a,us-west-2b,us-west-2c,us-west-2d |
+|             |         | m5a.16xlarge    | us-west-2d,us-west-2b,us-west-2c,us-west-2a |
+|             |         | m5d.16xlarge    | us-west-2b,us-west-2c,us-west-2d,us-west-2a |
+|             |         | m4.16xlarge     | us-west-2b,us-west-2a,us-west-2c            |
+|             |         | m5n.16xlarge    | us-west-2a,us-west-2b,us-west-2c            |
+|             |         | m5dn.16xlarge   | us-west-2a,us-west-2b,us-west-2c            |
++-------------+---------+-----------------+---------------------------------------------+
+| 24xlarge    |   2.107 | m5.24xlarge     | us-west-2b,us-west-2d,us-west-2a,us-west-2c |
+|             |         | m5a.24xlarge    | us-west-2c,us-west-2b,us-west-2d,us-west-2a |
+|             |         | m5d.24xlarge    | us-west-2b,us-west-2a,us-west-2d,us-west-2c |
+|             |         | m5ad.24xlarge   | us-west-2c,us-west-2b,us-west-2a,us-west-2d |
+|             |         | m5n.24xlarge    | us-west-2a,us-west-2b,us-west-2c            |
+|             |         | m5dn.24xlarge   | us-west-2b,us-west-2c,us-west-2a            |
++-------------+---------+-----------------+---------------------------------------------+
+
+group: memory
++-------------+---------+-----------------+---------------------------------------------+
+| Candidate   |   Price | Instance Type   | Availability Zones                          |
++=============+=========+=================+=============================================+
+| large       |   0.036 | r5.large        | us-west-2c,us-west-2a,us-west-2d,us-west-2b |
+|             |         | r5d.large       | us-west-2d,us-west-2b,us-west-2c,us-west-2a |
+|             |         | r5n.large       | us-west-2a,us-west-2b,us-west-2c            |
+|             |         | r5dn.large      | us-west-2c,us-west-2b,us-west-2a            |
+|             |         | r4.large        | us-west-2b,us-west-2a,us-west-2c            |
+|             |         | r5a.large       | us-west-2b,us-west-2c,us-west-2a,us-west-2d |
++-------------+---------+-----------------+---------------------------------------------+
+| xlarge      |   0.082 | r5d.xlarge      | us-west-2d,us-west-2b,us-west-2c,us-west-2a |
+|             |         | r5a.xlarge      | us-west-2c,us-west-2a,us-west-2b,us-west-2d |
+|             |         | r5ad.xlarge     | us-west-2c,us-west-2b,us-west-2a,us-west-2d |
+|             |         | r5n.xlarge      | us-west-2b,us-west-2c,us-west-2a            |
+|             |         | r5.xlarge       | us-west-2b,us-west-2d,us-west-2a,us-west-2c |
+|             |         | r4.xlarge       | us-west-2b,us-west-2a,us-west-2c            |
++-------------+---------+-----------------+---------------------------------------------+
+| 2xlarge     |   0.185 | r5d.2xlarge     | us-west-2a,us-west-2d,us-west-2c,us-west-2b |
+|             |         | r5a.2xlarge     | us-west-2c,us-west-2a,us-west-2d,us-west-2b |
+|             |         | r4.2xlarge      | us-west-2a,us-west-2c,us-west-2b            |
+|             |         | r5.2xlarge      | us-west-2c,us-west-2d,us-west-2a,us-west-2b |
+|             |         | r5n.2xlarge     | us-west-2c,us-west-2b,us-west-2a            |
+|             |         | r5ad.2xlarge    | us-west-2b,us-west-2a,us-west-2d,us-west-2c |
++-------------+---------+-----------------+---------------------------------------------+
+| 4xlarge     |   0.367 | r5ad.4xlarge    | us-west-2b,us-west-2d,us-west-2c,us-west-2a |
+|             |         | r5a.4xlarge     | us-west-2a,us-west-2c,us-west-2b,us-west-2d |
+|             |         | r5.4xlarge      | us-west-2b,us-west-2a,us-west-2c,us-west-2d |
+|             |         | r4.4xlarge      | us-west-2c,us-west-2b,us-west-2a            |
+|             |         | r5d.4xlarge     | us-west-2b,us-west-2c,us-west-2a,us-west-2d |
+|             |         | r5dn.4xlarge    | us-west-2b,us-west-2c,us-west-2a            |
++-------------+---------+-----------------+---------------------------------------------+
+| 8xlarge     |   0.844 | r5ad.8xlarge    | us-west-2d                                  |
+|             |         | r5a.8xlarge     | us-west-2b,us-west-2d,us-west-2c,us-west-2a |
+|             |         | r5d.8xlarge     | us-west-2b,us-west-2c,us-west-2a,us-west-2d |
+|             |         | r4.8xlarge      | us-west-2c,us-west-2a,us-west-2b            |
+|             |         | r5dn.8xlarge    | us-west-2b,us-west-2a,us-west-2c            |
+|             |         | r5.8xlarge      | us-west-2b,us-west-2c,us-west-2d,us-west-2a |
+|             |         | r5n.8xlarge     | us-west-2a,us-west-2b,us-west-2c            |
++-------------+---------+-----------------+---------------------------------------------+
+| 12xlarge    |   1.199 | r5a.12xlarge    | us-west-2d,us-west-2b,us-west-2c,us-west-2a |
+|             |         | r5.12xlarge     | us-west-2b,us-west-2d,us-west-2c,us-west-2a |
+|             |         | r5n.12xlarge    | us-west-2b,us-west-2a,us-west-2c            |
+|             |         | r5d.12xlarge    | us-west-2a,us-west-2d,us-west-2b,us-west-2c |
+|             |         | r5dn.12xlarge   | us-west-2b,us-west-2c,us-west-2a            |
+|             |         | r5ad.12xlarge   | us-west-2a,us-west-2b,us-west-2c,us-west-2d |
++-------------+---------+-----------------+---------------------------------------------+
+| 16xlarge    |   1.382 | r5ad.16xlarge   | us-west-2d                                  |
+|             |         | r5a.16xlarge    | us-west-2c,us-west-2a,us-west-2b,us-west-2d |
+|             |         | r5n.16xlarge    | us-west-2c,us-west-2a,us-west-2b            |
+|             |         | r5.16xlarge     | us-west-2d,us-west-2b,us-west-2c,us-west-2a |
+|             |         | r5d.16xlarge    | us-west-2a,us-west-2d,us-west-2c,us-west-2b |
+|             |         | r4.16xlarge     | us-west-2b,us-west-2c,us-west-2a            |
+|             |         | r5dn.16xlarge   | us-west-2c,us-west-2a,us-west-2b            |
++-------------+---------+-----------------+---------------------------------------------+
+| 24xlarge    |   2.421 | r5.24xlarge     | us-west-2d,us-west-2b,us-west-2c,us-west-2a |
+|             |         | r5a.24xlarge    | us-west-2c,us-west-2b,us-west-2a,us-west-2d |
+|             |         | r5d.24xlarge    | us-west-2d,us-west-2c,us-west-2a,us-west-2b |
+|             |         | r5n.24xlarge    | us-west-2a,us-west-2c,us-west-2b            |
+|             |         | r5dn.24xlarge   | us-west-2b,us-west-2c,us-west-2a            |
+|             |         | r5ad.24xlarge   | us-west-2d,us-west-2a,us-west-2b,us-west-2c |
++-------------+---------+-----------------+---------------------------------------------+

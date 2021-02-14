@@ -70,5 +70,5 @@ def quality(stat_collector, cov_level):
     :param cov_level: acceptable limit for coefficient of variation
     :return: True if coefficient of variation is within acceptable limit
     """
-    avg, stddev =  stat_collector.eval(sampled=False)
+    avg, stddev = stat_collector.eval(sampled=False)
     return stddev / avg < cov_level

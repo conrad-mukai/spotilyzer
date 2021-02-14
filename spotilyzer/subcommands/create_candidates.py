@@ -9,11 +9,8 @@ import heapq
 import sys
 import textwrap
 
-# 3rd party imports
-import tabulate
-
 # project imports
-from .base import SubCommand
+from .candidates_base import CandidatesBase
 from .utils.cli import options, posint, csv
 from .utils.paths import find_seeds_file
 from .utils.stats import quality, StatCollector
@@ -52,7 +49,7 @@ _TABLE_FORMAT = 'grid'
 _TABLE_FLOAT_FORMAT = '.3f'
 
 
-class CreateCandidates(SubCommand):
+class CreateCandidates(CandidatesBase):
     """
     create-candidates subcommand
     """
@@ -105,7 +102,7 @@ class CreateCandidates(SubCommand):
         self._price_candidates(candidates)
         self._get_candidate_resources(candidates)
         results = self._save_candidates(candidates, timestamp)
-        self._display_results(results)
+        self.display_candidates(results)
 
     def _set_region(self):
         region = self.getarg(_REGION_OPT)
@@ -423,32 +420,3 @@ class CreateCandidates(SubCommand):
                     )
         save_candidates(self.getarg(_CANDIDATES_ARG), results)
         return results
-
-    @staticmethod
-    def _display_results(results):
-        print()
-        print(f"{REGION_KEY}: {results[REGION_KEY]}")
-        print(f"{META_DATA_KEY}:")
-        print(f"  {TIMESTAMP_KEY}: {results[META_DATA_KEY][TIMESTAMP_KEY]}")
-        print(f"  {DURATION_KEY}: {results[META_DATA_KEY][DURATION_KEY]} days")
-        print(f"  {MINPOOL_KEY}: {results[META_DATA_KEY][MINPOOL_KEY]}")
-        for group in results[GROUPS_KEY]:
-            print()
-            print(f"group: {group[GROUP_NAME_KEY]}")
-            table = [
-                [
-                    c[CANDIDATE_NAME_KEY],
-                    c[PRICE_KEY],
-                    '\n'.join(
-                        p[INSTANCE_TYPE_KEY] for p in c[CANDIDATE_POOLS_KEY]
-                    ),
-                    '\n'.join(
-                        ','.join(p[AVAILABILITY_ZONES_KEY])
-                        for p in c[CANDIDATE_POOLS_KEY]
-                    )
-                ]
-                for c in group[CANDIDATES_KEY]
-            ]
-            print(tabulate.tabulate(table, headers=_TABLE_HEADER,
-                                    tablefmt=_TABLE_FORMAT,
-                                    floatfmt=_TABLE_FLOAT_FORMAT))

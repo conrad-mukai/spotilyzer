@@ -172,7 +172,9 @@ console like so:
 
 This shows the candidate name, the average hourly price across the candidate
 fleet, and the pools (the instance types and all availability zones they are
-offered).
+offered). The information stored in the JSON file is difficult to read. To
+view the contents of the JSON file in the same tabular format as shown above
+use the `show-candidates` subcommand.
 
 The `create-candidates` subcommand can be run against any AWS region and with
 any  subset of availability zones (the default is all availability zones in a
